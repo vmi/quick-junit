@@ -1,1 +1,5 @@
 quick-junit-pde.jar
+/.classpath
+/.project
+/.settings/
+/target/

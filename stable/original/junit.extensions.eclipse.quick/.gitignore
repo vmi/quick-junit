@@ -1,1 +1,5 @@
 quick-junit.jar
+/.classpath
+/.project
+/.settings/
+/target/
