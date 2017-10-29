@@ -50,7 +50,7 @@
             adaptable="true"
             id="junit.extensions.eclipse.quick.object.java">
          <menu
-               label="&amp;Quick JUnit"
+               label="&amp;Quick JUnit (selected)"
                path="additions"
                id="junit.extensions.eclipse.quick.object.java.Actions">
             <separator
