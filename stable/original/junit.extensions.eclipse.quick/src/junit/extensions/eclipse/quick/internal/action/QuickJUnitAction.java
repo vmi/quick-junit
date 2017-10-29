@@ -71,7 +71,7 @@ public abstract class QuickJUnitAction implements IEditorActionDelegate, IObject
         if (javaEditor == null)
             return null;
         IEditorInput input = javaEditor.getEditorInput();
-        IJavaElement element = input.getAdapter(IJavaElement.class);
+        IJavaElement element = (IJavaElement) input.getAdapter(IJavaElement.class);
         if (element instanceof ICompilationUnit)
             return (ICompilationUnit) element;
         return null;

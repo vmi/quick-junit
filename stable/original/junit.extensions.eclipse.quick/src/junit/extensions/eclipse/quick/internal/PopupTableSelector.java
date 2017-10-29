@@ -138,7 +138,7 @@ public class PopupTableSelector {
         /* Fetch the key bindings for the forward and backward commands.  They will not
          * change while the dialog is open, but the context will.  Bug 55581.
          */
-        final IBindingService bindingService = PlatformUI.getWorkbench()
+        final IBindingService bindingService = (IBindingService) PlatformUI.getWorkbench()
                 .getAdapter(IBindingService.class);
 
         if (commandForward != null) {
