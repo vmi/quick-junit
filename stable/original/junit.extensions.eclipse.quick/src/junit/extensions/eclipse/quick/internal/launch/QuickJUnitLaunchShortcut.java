@@ -44,6 +44,7 @@ import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 /**
  * Copied from super class.
  */
+@SuppressWarnings("restriction")
 public class QuickJUnitLaunchShortcut extends JUnitLaunchShortcut {
 
     private static final String EMPTY_STRING= "";

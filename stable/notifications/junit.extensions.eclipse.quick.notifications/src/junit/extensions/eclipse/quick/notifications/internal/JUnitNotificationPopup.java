@@ -25,7 +25,6 @@ import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 
-@SuppressWarnings("restriction")
 public class JUnitNotificationPopup extends AbstractNotificationPopup {
 
     private Shell shell;
