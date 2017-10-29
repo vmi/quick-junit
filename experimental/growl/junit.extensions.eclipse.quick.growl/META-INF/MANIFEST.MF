@@ -4,7 +4,7 @@ Bundle-Name: JUnit Growl Integration
 Bundle-SymbolicName: junit.extensions.eclipse.quick.growl;singleton:=true
 Bundle-Version: 0.8.0.qualifier
 Bundle-Vendor: Quick JUnit Project
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: Growl.jar,
  growl_extension.jar
 Bundle-Activator: junit.extensions.eclipse.quick.mac.growl.internal.GrowlActivator

@@ -26,4 +26,4 @@ Export-Package: junit.extensions.eclipse.quick,
  junit.extensions.eclipse.quick.internal;x-friends:="junit.extensions.eclipse.quick.pde",
  junit.extensions.eclipse.quick.internal.action;x-friends:="junit.extensions.eclipse.quick.pde"
 Bundle-ClassPath: quick-junit.jar
-Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
