@@ -451,11 +451,6 @@ public class SearchJavaClassFromDocTagVisitorTest {
 		project.dispose();
 	}
 
-	/*
-	 * ���������������Source���Null������������NullPointerException������������������
-	 * NullPointerException���������������������������������������������assert������������
-	 * Test������������������������������
-	 */
 	@Test
 	@Ignore
 	public void nullStringAccepted() throws Exception {
