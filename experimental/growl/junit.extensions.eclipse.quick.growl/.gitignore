@@ -2,3 +2,4 @@ growl_extension.jar
 /.classpath
 /.project
 /.settings/
+/target/
