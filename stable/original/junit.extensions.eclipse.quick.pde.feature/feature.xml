@@ -2,7 +2,7 @@
 <feature
       id="junit.extensions.eclipse.quick.pde.feature"
       label="%featureName"
-      version="0.6.0.qualifier"
+      version="0.8.0.qualifier"
       provider-name="%providerName"
       plugin="junit.extensions.eclipse.quick">
 

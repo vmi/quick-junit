@@ -10,7 +10,6 @@
 
   <artifactId>junit.extensions.eclipse.quick.mock.feature</artifactId>
   <packaging>eclipse-feature</packaging>
-  <version>0.3.0.qualifier</version>
 
   <build>
     <plugins>

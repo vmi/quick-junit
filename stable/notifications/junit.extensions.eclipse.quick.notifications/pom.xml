@@ -10,6 +10,5 @@
 
   <artifactId>junit.extensions.eclipse.quick.notifications</artifactId>
   <packaging>eclipse-plugin</packaging>
-  <version>0.2.1.qualifier</version>
 
 </project>

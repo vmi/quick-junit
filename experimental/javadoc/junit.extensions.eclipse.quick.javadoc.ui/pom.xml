@@ -10,6 +10,5 @@
 
   <artifactId>junit.extensions.eclipse.quick.javadoc.ui</artifactId>
   <packaging>eclipse-plugin</packaging>
-  <version>0.5.0.qualifier</version>
 
 </project>

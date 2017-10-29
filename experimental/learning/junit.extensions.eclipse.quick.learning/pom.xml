@@ -10,6 +10,5 @@
 
   <artifactId>junit.extensions.eclipse.quick.learning</artifactId>
   <packaging>eclipse-plugin</packaging>
-  <version>0.1.0.qualifier</version>
 
 </project>

@@ -10,7 +10,6 @@
 
   <artifactId>junit.extensions.eclipse.quick.growl.feature</artifactId>
   <packaging>eclipse-feature</packaging>
-  <version>0.1.2.qualifier</version>
 
   <build>
     <plugins>

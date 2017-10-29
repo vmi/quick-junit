@@ -10,7 +10,6 @@
 
   <artifactId>junit.extensions.eclipse.quick.process.feature</artifactId>
   <packaging>eclipse-feature</packaging>
-  <version>0.1.1.qualifier</version>
 
   <build>
     <plugins>
