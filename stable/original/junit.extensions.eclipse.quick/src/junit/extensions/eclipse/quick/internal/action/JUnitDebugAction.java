@@ -6,7 +6,7 @@ import org.eclipse.core.runtime.CoreException;
 
 public class JUnitDebugAction extends JUnitLaunchAction {
     
-	public JUnitDebugAction() throws CoreException {
-		super(ExtensionSupport.createJUnitLaunchShortcut(), "debug"); //$NON-NLS-1$
+    public JUnitDebugAction() throws CoreException {
+        super(ExtensionSupport.createJUnitLaunchShortcut(), "debug"); //$NON-NLS-1$
     }
 }

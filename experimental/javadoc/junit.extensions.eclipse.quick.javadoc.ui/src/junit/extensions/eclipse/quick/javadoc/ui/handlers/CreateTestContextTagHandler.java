@@ -12,29 +12,29 @@ import org.eclipse.jdt.core.*;
  */
 public class CreateTestContextTagHandler extends AbstractJavaDocHandler {
 
-	public CreateTestContextTagHandler() {
-	}
+    public CreateTestContextTagHandler() {
+    }
 
-	public Object doExecute(ExecutionEvent event) throws ExecutionException {
-		try {
-			ICompilationUnit compilationUnit = getCompilationUnitOfJavaEditor();
-			TestContextTagCreater creater = new TestContextTagCreater();
-			IJavaElement element = getElementOfCurrentCursor();
-			String clazz = "";
-			if(element instanceof IType){
-				IType type = (IType)element;					
-				clazz = type.getFullyQualifiedName();
-			}else if(element instanceof IMember){
-				IMember member = (IMember) element;
-				IType type = member.getDeclaringType();
-				clazz = type.getFullyQualifiedName();
-			}else if(element != null){
-				clazz = element.getPrimaryElement().getElementName();
-			}
-			creater.addTag(compilationUnit.findPrimaryType(), clazz);
-		} catch (Exception e) {
-			JavaDocUIActivator.getDefault().handleSystemError(e, this);
-		}
-		return null;
-	}
+    public Object doExecute(ExecutionEvent event) throws ExecutionException {
+        try {
+            ICompilationUnit compilationUnit = getCompilationUnitOfJavaEditor();
+            TestContextTagCreater creater = new TestContextTagCreater();
+            IJavaElement element = getElementOfCurrentCursor();
+            String clazz = "";
+            if(element instanceof IType){
+                IType type = (IType)element;
+                clazz = type.getFullyQualifiedName();
+            }else if(element instanceof IMember){
+                IMember member = (IMember) element;
+                IType type = member.getDeclaringType();
+                clazz = type.getFullyQualifiedName();
+            }else if(element != null){
+                clazz = element.getPrimaryElement().getElementName();
+            }
+            creater.addTag(compilationUnit.findPrimaryType(), clazz);
+        } catch (Exception e) {
+            JavaDocUIActivator.getDefault().handleSystemError(e, this);
+        }
+        return null;
+    }
 }

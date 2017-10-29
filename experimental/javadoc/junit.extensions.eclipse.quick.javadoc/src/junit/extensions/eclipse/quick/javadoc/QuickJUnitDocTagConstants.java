@@ -1,9 +1,9 @@
 package junit.extensions.eclipse.quick.javadoc;
 
 public enum QuickJUnitDocTagConstants {
-	TestContext;
+    TestContext;
 
-	public String toAnnotation(){
-		return "@" + name();
-	}
+    public String toAnnotation(){
+        return "@" + name();
+    }
 }

@@ -4,9 +4,9 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 public class Activator extends AbstractUIPlugin {
-	
-	private static Activator plugin;
-	
+
+    private static Activator plugin;
+
     public Activator() {
         plugin = this;
     }
@@ -20,9 +20,9 @@ public class Activator extends AbstractUIPlugin {
         plugin = null;
     }
 
-	
-	public static Activator getDefault(){
-		return Activator.plugin;
-	}
+
+    public static Activator getDefault(){
+        return Activator.plugin;
+    }
 
 }

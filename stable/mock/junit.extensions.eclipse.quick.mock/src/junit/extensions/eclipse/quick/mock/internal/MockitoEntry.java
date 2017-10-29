@@ -15,28 +15,28 @@ import org.osgi.framework.Bundle;
 
 public class MockitoEntry {
 
-	public static final String CONTAINER_PATH = "junit.extensions.eclipse.quick.mock.MOCKITO_CONTAINER";
+    public static final String CONTAINER_PATH = "junit.extensions.eclipse.quick.mock.MOCKITO_CONTAINER";
 
-	public IPath getPath(){
-		Bundle bundle = Platform.getBundle("org.mockito");
-		URL entry = bundle.getEntry("mockito.jar");
-		String fileURL = null;
-		try {
-			fileURL = URLDecoder.decode(FileLocator.toFileURL(entry).getFile(), "UTF-8");
-		} catch (IOException e) {
-		}
-		return new Path(fileURL);
-	}
-	
-	public IClasspathEntry getContainer(){
-		IPath path = getContainerPath();
-		IClasspathEntry entry = JavaCore.newContainerEntry(path );
-		return entry;
-	}
+    public IPath getPath(){
+        Bundle bundle = Platform.getBundle("org.mockito");
+        URL entry = bundle.getEntry("mockito.jar");
+        String fileURL = null;
+        try {
+            fileURL = URLDecoder.decode(FileLocator.toFileURL(entry).getFile(), "UTF-8");
+        } catch (IOException e) {
+        }
+        return new Path(fileURL);
+    }
 
-	public IPath getContainerPath() {
-		IPath path = new Path(CONTAINER_PATH);
-		return path;
-	}
-	
+    public IClasspathEntry getContainer(){
+        IPath path = getContainerPath();
+        IClasspathEntry entry = JavaCore.newContainerEntry(path );
+        return entry;
+    }
+
+    public IPath getContainerPath() {
+        IPath path = new Path(CONTAINER_PATH);
+        return path;
+    }
+
 }

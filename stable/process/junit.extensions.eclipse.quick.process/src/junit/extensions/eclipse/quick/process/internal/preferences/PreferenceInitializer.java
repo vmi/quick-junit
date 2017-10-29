@@ -13,10 +13,10 @@ import static junit.extensions.eclipse.quick.process.internal.preferences.Prefer
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
-	public void initializeDefaultPreferences() {
-		IPreferenceStore store = ProcessActivator.getDefault().getPreferenceStore();
-		store.setDefault(PROCESS.name(), "/usr/local/bin/growlnotify -n \"Quick JUnit\" -m ${detail} ${summary}"); //$NON-NLS-1$
-		store.setDefault(TEMPLATE.name(), "${name} passed:${ok_counts} failure:${fail_counts} Total:${total_counts}"); //$NON-NLS-1$
-	}
+    public void initializeDefaultPreferences() {
+        IPreferenceStore store = ProcessActivator.getDefault().getPreferenceStore();
+        store.setDefault(PROCESS.name(), "/usr/local/bin/growlnotify -n \"Quick JUnit\" -m ${detail} ${summary}"); //$NON-NLS-1$
+        store.setDefault(TEMPLATE.name(), "${name} passed:${ok_counts} failure:${fail_counts} Total:${total_counts}"); //$NON-NLS-1$
+    }
 
 }

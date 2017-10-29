@@ -18,11 +18,11 @@ import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 public class ExtensionSupport {
 
     public static ILaunchConfigurationWorkingCopy createLaunchConfigurationWorkingCopy(IJavaProject project) throws CoreException{
-    	return createWorkingCopy("org.eclipse.jdt.junit.launchconfig",project);
+        return createWorkingCopy("org.eclipse.jdt.junit.launchconfig",project);
     }
-    
+
     public static ILaunchConfiguration getLaunchConfiguration(IJavaProject project) throws CoreException{
-    	return getWorkingCopy("org.eclipse.jdt.junit.launchconfig",project);
+        return getWorkingCopy("org.eclipse.jdt.junit.launchconfig",project);
     }
 
     protected static ILaunchShortcut createLaunchShortcut(final String namespace)
@@ -44,34 +44,34 @@ public class ExtensionSupport {
     }
 
     private static ILaunchConfigurationWorkingCopy createWorkingCopy(final String namespace, IJavaProject project)throws CoreException {
-    	DebugPlugin debugPlugin = DebugPlugin.getDefault();
-		ILaunchManager launchManager = debugPlugin.getLaunchManager();
-		ILaunchConfigurationType launchConfigurationType = launchManager.getLaunchConfigurationType(namespace);
-		ILaunchConfigurationWorkingCopy launchConfiguration = launchConfigurationType.newInstance(null, defaultName(project));
-    	if(launchConfiguration == null){
-    		throw new RuntimeException("LaunchConfigurationTypes not found. namespace:" + namespace); //$NON-NLS-1$
-    	}
-    	launchConfiguration.setContainer(project.getProject());
-    	launchConfiguration.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, project.getElementName());
-    	launchConfiguration.setAttribute("org.eclipse.jdt.junit.CONTAINER", "=" + project.getElementName());
-		return launchConfiguration;
-	}
+        DebugPlugin debugPlugin = DebugPlugin.getDefault();
+        ILaunchManager launchManager = debugPlugin.getLaunchManager();
+        ILaunchConfigurationType launchConfigurationType = launchManager.getLaunchConfigurationType(namespace);
+        ILaunchConfigurationWorkingCopy launchConfiguration = launchConfigurationType.newInstance(null, defaultName(project));
+        if(launchConfiguration == null){
+            throw new RuntimeException("LaunchConfigurationTypes not found. namespace:" + namespace); //$NON-NLS-1$
+        }
+        launchConfiguration.setContainer(project.getProject());
+        launchConfiguration.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, project.getElementName());
+        launchConfiguration.setAttribute("org.eclipse.jdt.junit.CONTAINER", "=" + project.getElementName());
+        return launchConfiguration;
+    }
 
-	private static String defaultName(IJavaProject project) {
-		return project.getElementName() + ".default";
-	}
-    
+    private static String defaultName(IJavaProject project) {
+        return project.getElementName() + ".default";
+    }
+
     private static ILaunchConfiguration getWorkingCopy(String namespace, IJavaProject project) throws CoreException {
-    	ILaunchConfigurationType type = createWorkingCopy(namespace,project).getType();
-		ILaunchConfiguration[] configurations = DebugPlugin.getDefault().getLaunchManager().getLaunchConfigurations(type);
-		ILaunchConfiguration launchConfiguration = null;
-		for (int i = 0; i < configurations.length; i++){
-			ILaunchConfiguration candidate = configurations[i];
-			if(candidate.getName().equals(defaultName(project))){
-				return candidate;
-			}
-		}
-		return launchConfiguration;
-	}
+        ILaunchConfigurationType type = createWorkingCopy(namespace,project).getType();
+        ILaunchConfiguration[] configurations = DebugPlugin.getDefault().getLaunchManager().getLaunchConfigurations(type);
+        ILaunchConfiguration launchConfiguration = null;
+        for (int i = 0; i < configurations.length; i++){
+            ILaunchConfiguration candidate = configurations[i];
+            if(candidate.getName().equals(defaultName(project))){
+                return candidate;
+            }
+        }
+        return launchConfiguration;
+    }
 
 }

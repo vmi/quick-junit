@@ -33,107 +33,107 @@ import org.junit.Test;
 
 public class TestProjectTest {
 
-	private TestProject project;
-	private IWorkspace workspace;
-	
-	@Test
-	public void leaning_get_only_JavaDoc() throws Exception {
-		assertTrue(project.getProject().exists());
-		assertTrue(workspace.getRoot().exists(new Path("TestProject")));
-		assertTrue(workspace.getRoot().exists(new Path("TestProject/src/test")));
-		assertTrue(workspace.getRoot().exists(new Path("TestProject/src/test/TestClass.java")));
-		IType testClass = project.getJavaProject().findType("test.TestClass");
-		assertTrue(testClass.exists());
-		IMethod method = testClass.getMethod("test_test", null);
-		assertFalse(method.exists());
-		IMethod doMethod = testClass.getMethod("do_test", null);
-		IAnnotation annotation = doMethod.getAnnotation("org.junit.Test");
-		assertTrue(annotation.exists());
-		int length = doMethod.getJavadocRange().getLength();
-		System.out.println(doMethod.getSource().substring(0,length));
-		createAST(testClass);
-	}
-	
-	private void createAST(IType testClass) throws Exception {
-		ASTParser parser = ASTParser.newParser(AST.JLS3);
-		
-		parser.setSource(testClass.getCompilationUnit());
-		parser.createAST(new NullProgressMonitor());
-	}
+    private TestProject project;
+    private IWorkspace workspace;
 
-	@Before
-	public void before() throws Exception{
-		project = new TestProject();
-		project.addJar("org.junit", "junit.jar");
-		IWorkspaceRunnable runnable = new IWorkspaceRunnable(){
-			public void run(IProgressMonitor monitor) throws CoreException {
-				monitor.beginTask("create test project", 10);
-				IPackageFragment pack = project.createPackage("test");
-				monitor.setTaskName("create TestClass");
-				project.createType(pack, "TestClass.java", 
-						"public class TestClass{\n" +
-						"	/**\n" +
-						"	 *	@see test.TestClass\n" +
-						"	 */\n" +
-						"	@org.junit.Test\n" +
-						"	public void do_test() throws Exception{\n" +
-						"	}\n" +
-						"}\n"
-				);
-				monitor.setTaskName("create TestClass2");
-				project.createType(pack, "TestClass2.java", 
-						"public class TestClass2{\n" +
-						"	/**\n" +
-						"	 *	@see test.TestClass\n" +
-						"	 */\n" +
-						"	@org.junit.Test\n" +
-						"	public void do_test() throws Exception{\n" +
-						"	}\n" +
-						"}\n"
-				);
+    @Test
+    public void leaning_get_only_JavaDoc() throws Exception {
+        assertTrue(project.getProject().exists());
+        assertTrue(workspace.getRoot().exists(new Path("TestProject")));
+        assertTrue(workspace.getRoot().exists(new Path("TestProject/src/test")));
+        assertTrue(workspace.getRoot().exists(new Path("TestProject/src/test/TestClass.java")));
+        IType testClass = project.getJavaProject().findType("test.TestClass");
+        assertTrue(testClass.exists());
+        IMethod method = testClass.getMethod("test_test", null);
+        assertFalse(method.exists());
+        IMethod doMethod = testClass.getMethod("do_test", null);
+        IAnnotation annotation = doMethod.getAnnotation("org.junit.Test");
+        assertTrue(annotation.exists());
+        int length = doMethod.getJavadocRange().getLength();
+        System.out.println(doMethod.getSource().substring(0,length));
+        createAST(testClass);
+    }
 
-				project.getJavaProject().open(monitor);
-			}
-		};
-		workspace = ResourcesPlugin.getWorkspace();
-		workspace.run(runnable, null);
-		closeIntro();
-	}
+    private void createAST(IType testClass) throws Exception {
+        ASTParser parser = ASTParser.newParser(AST.JLS3);
 
-	private void closeIntro() {
-		IWorkbench workbench;
-		try {
-			workbench = PlatformUI.getWorkbench();
-		} catch (IllegalStateException e) {
-			return;
-		}
-		IIntroManager introManager = workbench.getIntroManager();
-		IIntroPart intro = introManager.getIntro();
-		if(intro != null && introManager.isIntroStandby(intro)){
-			introManager.closeIntro(intro);
-		}
-	}
-	
-	@Test
-	public void learning_SearchEngine() throws Exception {
-		SearchEngine engine = new SearchEngine();
-		IJavaSearchScope scope = SearchEngine.createWorkspaceScope();
-		SearchPattern pattern = SearchPattern.createPattern("TestClass2", IJavaSearchConstants.CLASS, IJavaSearchConstants.DECLARATIONS, SearchPattern.R_FULL_MATCH);
-		SearchParticipant[] participants = new SearchParticipant[] {SearchEngine.getDefaultSearchParticipant()};
-		SearchRequestor requestor = new SearchRequestor(){
-		
-			@Override
-			public void acceptSearchMatch(SearchMatch match) throws CoreException {
-				Object element = match.getElement();
-				System.out.println(element.getClass().getName());
-				System.out.println(element);
-			}
-		};
-		engine.search(pattern, participants, scope, requestor, new NullProgressMonitor());
-	}
-	
-	@After
-	public void after() throws Exception{
-		project.dispose();
-	}
+        parser.setSource(testClass.getCompilationUnit());
+        parser.createAST(new NullProgressMonitor());
+    }
+
+    @Before
+    public void before() throws Exception{
+        project = new TestProject();
+        project.addJar("org.junit", "junit.jar");
+        IWorkspaceRunnable runnable = new IWorkspaceRunnable(){
+            public void run(IProgressMonitor monitor) throws CoreException {
+                monitor.beginTask("create test project", 10);
+                IPackageFragment pack = project.createPackage("test");
+                monitor.setTaskName("create TestClass");
+                project.createType(pack, "TestClass.java",
+                        "public class TestClass{\n" +
+                        "   /**\n" +
+                        "    *  @see test.TestClass\n" +
+                        "    */\n" +
+                        "   @org.junit.Test\n" +
+                        "   public void do_test() throws Exception{\n" +
+                        "   }\n" +
+                        "}\n"
+                );
+                monitor.setTaskName("create TestClass2");
+                project.createType(pack, "TestClass2.java",
+                        "public class TestClass2{\n" +
+                        "   /**\n" +
+                        "    *  @see test.TestClass\n" +
+                        "    */\n" +
+                        "   @org.junit.Test\n" +
+                        "   public void do_test() throws Exception{\n" +
+                        "   }\n" +
+                        "}\n"
+                );
+
+                project.getJavaProject().open(monitor);
+            }
+        };
+        workspace = ResourcesPlugin.getWorkspace();
+        workspace.run(runnable, null);
+        closeIntro();
+    }
+
+    private void closeIntro() {
+        IWorkbench workbench;
+        try {
+            workbench = PlatformUI.getWorkbench();
+        } catch (IllegalStateException e) {
+            return;
+        }
+        IIntroManager introManager = workbench.getIntroManager();
+        IIntroPart intro = introManager.getIntro();
+        if(intro != null && introManager.isIntroStandby(intro)){
+            introManager.closeIntro(intro);
+        }
+    }
+
+    @Test
+    public void learning_SearchEngine() throws Exception {
+        SearchEngine engine = new SearchEngine();
+        IJavaSearchScope scope = SearchEngine.createWorkspaceScope();
+        SearchPattern pattern = SearchPattern.createPattern("TestClass2", IJavaSearchConstants.CLASS, IJavaSearchConstants.DECLARATIONS, SearchPattern.R_FULL_MATCH);
+        SearchParticipant[] participants = new SearchParticipant[] {SearchEngine.getDefaultSearchParticipant()};
+        SearchRequestor requestor = new SearchRequestor(){
+
+            @Override
+            public void acceptSearchMatch(SearchMatch match) throws CoreException {
+                Object element = match.getElement();
+                System.out.println(element.getClass().getName());
+                System.out.println(element);
+            }
+        };
+        engine.search(pattern, participants, scope, requestor, new NullProgressMonitor());
+    }
+
+    @After
+    public void after() throws Exception{
+        project.dispose();
+    }
 }

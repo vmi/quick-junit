@@ -16,31 +16,31 @@ import org.eclipse.ui.texteditor.ITextEditor;
 
 public abstract class AbstractJavaDocHandler extends AbstractHandler {
 
-	private ITextEditor textEditor;
-	private IWorkbenchWindow window;
+    private ITextEditor textEditor;
+    private IWorkbenchWindow window;
 
-	public final Object execute(ExecutionEvent event) throws ExecutionException {
-		window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-		textEditor = (ITextEditor)HandlerUtil.getActiveEditor(event);
-		return doExecute(event);
-	}
-	
-	protected abstract Object doExecute(ExecutionEvent event) throws ExecutionException;
-	
-	protected ITextEditor getTextEdtior(){
-		return textEditor;
-	}
-	
-	protected IWorkbenchWindow getWorkbenchWindow(){
-		return window;
-	}
-	
+    public final Object execute(ExecutionEvent event) throws ExecutionException {
+        window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+        textEditor = (ITextEditor)HandlerUtil.getActiveEditor(event);
+        return doExecute(event);
+    }
+    
+    protected abstract Object doExecute(ExecutionEvent event) throws ExecutionException;
+    
+    protected ITextEditor getTextEdtior(){
+        return textEditor;
+    }
+    
+    protected IWorkbenchWindow getWorkbenchWindow(){
+        return window;
+    }
+    
     protected IJavaElement getElementOfJavaEditor() throws JavaModelException {
         ICompilationUnit unit = getCompilationUnitOfJavaEditor();
         if (unit == null)
             return null;
         ITextSelection text = getTextSelectionOfJavaEditor();
-		int offset = text.getOffset();
+        int offset = text.getOffset();
         IJavaElement element = unit.getElementAt(offset);
         return element;
     }
@@ -50,8 +50,8 @@ public abstract class AbstractJavaDocHandler extends AbstractHandler {
         if (unit == null)
             return null;
         ITextSelection text = getTextSelectionOfJavaEditor();
-		int offset = text.getOffset();
-		int length = text.getLength();
+        int offset = text.getOffset();
+        int length = text.getLength();
         IJavaElement[] elements = unit.codeSelect(offset, length);
         if(elements.length == 0) return null;
         return elements[0];
@@ -67,7 +67,7 @@ public abstract class AbstractJavaDocHandler extends AbstractHandler {
         
     protected ICompilationUnit getCompilationUnitOfJavaEditor() throws JavaModelException {
         ITextEditor textEdtior = getTextEdtior();
-		if (textEdtior == null)
+        if (textEdtior == null)
             return null;
         IEditorInput input = textEdtior.getEditorInput();
         IJavaElement element = (IJavaElement) input.getAdapter(IJavaElement.class);

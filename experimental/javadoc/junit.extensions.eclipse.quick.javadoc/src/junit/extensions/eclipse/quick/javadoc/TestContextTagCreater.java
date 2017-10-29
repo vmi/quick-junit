@@ -13,68 +13,68 @@ import org.eclipse.text.edits.TextEdit;
 
 public class TestContextTagCreater{
 
-	private ASTParser parser;
+    private ASTParser parser;
 
-	public TestContextTagCreater(){
-		parser = ASTParser.newParser(AST.JLS3);
-		parser.setBindingsRecovery(true);			
-	}
-	
-	public void addTag(IType type,String clazz) {
-		if(type == null){
-			throw new IllegalArgumentException("addTag is needed 'type' value.");
-		}
-		ICompilationUnit jdtUnit = type.getCompilationUnit();
-		try {
-			parser.setSource(jdtUnit);
-			IProgressMonitor monitor = new NullProgressMonitor();
-			ASTNode node = parser.createAST(monitor);
-			if(node instanceof CompilationUnit){
-				CompilationUnit unit = (CompilationUnit) node;
-				List<?> types = unit.types();
-				unit.recordModifications();
-				AbstractTypeDeclaration declaratingNode = (AbstractTypeDeclaration)types.get(0);
-				AST ast = unit.getRoot().getAST();
-				addTagToJavaDoc(clazz, declaratingNode, ast);
+    public TestContextTagCreater(){
+        parser = ASTParser.newParser(AST.JLS3);
+        parser.setBindingsRecovery(true);
+    }
 
-				Document document = new Document();
-				document.set(jdtUnit.getSource());
-				TextEdit edits = unit.rewrite(document,jdtUnit.getJavaProject().getOptions(true));
-				edits.apply(document);
-				String newSource = document.get();
-				ICompilationUnit workingCopy = jdtUnit.getWorkingCopy(monitor);
-				IBuffer buffer = workingCopy.getBuffer();
-				buffer.setContents(newSource);
-				workingCopy.commitWorkingCopy(true, monitor);
-			}
-		} catch (Exception e) {
-			JavaDocActivator.getDefault().handleSystemError(e, this);
-			e.printStackTrace();
-		}
-	}
+    public void addTag(IType type,String clazz) {
+        if(type == null){
+            throw new IllegalArgumentException("addTag is needed 'type' value.");
+        }
+        ICompilationUnit jdtUnit = type.getCompilationUnit();
+        try {
+            parser.setSource(jdtUnit);
+            IProgressMonitor monitor = new NullProgressMonitor();
+            ASTNode node = parser.createAST(monitor);
+            if(node instanceof CompilationUnit){
+                CompilationUnit unit = (CompilationUnit) node;
+                List<?> types = unit.types();
+                unit.recordModifications();
+                AbstractTypeDeclaration declaratingNode = (AbstractTypeDeclaration)types.get(0);
+                AST ast = unit.getRoot().getAST();
+                addTagToJavaDoc(clazz, declaratingNode, ast);
 
-	@SuppressWarnings("unchecked")
-	private void addTagToJavaDoc(String clazz,
-			AbstractTypeDeclaration declaratingNode, AST ast) {
-		Javadoc javadoc = declaratingNode.getJavadoc();
-		if(javadoc == null){
-			javadoc = ast.newJavadoc();
-			declaratingNode.setJavadoc(javadoc);
-		}
-		TagElement tag = createTag(ast, clazz);
-		javadoc.tags().add(tag);
-	}
+                Document document = new Document();
+                document.set(jdtUnit.getSource());
+                TextEdit edits = unit.rewrite(document,jdtUnit.getJavaProject().getOptions(true));
+                edits.apply(document);
+                String newSource = document.get();
+                ICompilationUnit workingCopy = jdtUnit.getWorkingCopy(monitor);
+                IBuffer buffer = workingCopy.getBuffer();
+                buffer.setContents(newSource);
+                workingCopy.commitWorkingCopy(true, monitor);
+            }
+        } catch (Exception e) {
+            JavaDocActivator.getDefault().handleSystemError(e, this);
+            e.printStackTrace();
+        }
+    }
 
-	@SuppressWarnings("unchecked")
-	private TagElement createTag(AST ast, String clazz) {
-		TagElement tag = ast.newTagElement();
-		tag.setTagName(QuickJUnitDocTagConstants.TestContext.toAnnotation());
-		if(clazz == null || clazz.equals("")){
-			return tag;
-		}
-		Name newName = ast.newName(clazz);
-		tag.fragments().add(newName);
-		return tag;
-	}
-	
+    @SuppressWarnings("unchecked")
+    private void addTagToJavaDoc(String clazz,
+            AbstractTypeDeclaration declaratingNode, AST ast) {
+        Javadoc javadoc = declaratingNode.getJavadoc();
+        if(javadoc == null){
+            javadoc = ast.newJavadoc();
+            declaratingNode.setJavadoc(javadoc);
+        }
+        TagElement tag = createTag(ast, clazz);
+        javadoc.tags().add(tag);
+    }
+
+    @SuppressWarnings("unchecked")
+    private TagElement createTag(AST ast, String clazz) {
+        TagElement tag = ast.newTagElement();
+        tag.setTagName(QuickJUnitDocTagConstants.TestContext.toAnnotation());
+        if(clazz == null || clazz.equals("")){
+            return tag;
+        }
+        Name newName = ast.newName(clazz);
+        tag.fragments().add(newName);
+        return tag;
+    }
+
 }

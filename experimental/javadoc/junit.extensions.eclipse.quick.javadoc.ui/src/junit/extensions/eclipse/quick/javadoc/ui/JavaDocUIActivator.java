@@ -16,26 +16,26 @@ import org.osgi.framework.Constants;
 
 public class JavaDocUIActivator extends AbstractUIPlugin {
 
-	public static final String PLUGIN_ID = "junit.extensions.eclipse.quick.javadoc.ui";
+    public static final String PLUGIN_ID = "junit.extensions.eclipse.quick.javadoc.ui";
 
-	private static JavaDocUIActivator plugin;
-	
-	public JavaDocUIActivator() {
-	}
+    private static JavaDocUIActivator plugin;
 
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
-	}
+    public JavaDocUIActivator() {
+    }
 
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-		super.stop(context);
-	}
+    public void start(BundleContext context) throws Exception {
+        super.start(context);
+        plugin = this;
+    }
 
-	public static JavaDocUIActivator getDefault() {
-		return plugin;
-	}
+    public void stop(BundleContext context) throws Exception {
+        plugin = null;
+        super.stop(context);
+    }
+
+    public static JavaDocUIActivator getDefault() {
+        return plugin;
+    }
 
     public IStatus createSystemErrorStatus(Exception ex, Object caller) {
         int severity = IStatus.ERROR;
@@ -45,7 +45,7 @@ public class JavaDocUIActivator extends AbstractUIPlugin {
         if (message == null)
             message = ""; //$NON-NLS-1$
         MultiStatus errorStatus = new MultiStatus(getID(), severity, message, ex);
-        
+
         Dictionary<?, ?> headers = getBundle().getHeaders();
 
         String providerName = "" + headers.get(Constants.BUNDLE_VENDOR);
@@ -78,7 +78,7 @@ public class JavaDocUIActivator extends AbstractUIPlugin {
     private IStatus createStatus(int severity, String message, int code, Exception ex) {
         return new Status(severity, getID(), code, message, ex);
     }
-    
+
     public void handleSystemError(Exception e, Object caller) {
         IStatus status = createSystemErrorStatus(e, caller);
         getLog().log(status);
@@ -95,12 +95,12 @@ public class JavaDocUIActivator extends AbstractUIPlugin {
         getLog().log(status);
     }
 
-	
-	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, path);
-	}
 
-	public String getID() {
+    public static ImageDescriptor getImageDescriptor(String path) {
+        return imageDescriptorFromPlugin(PLUGIN_ID, path);
+    }
+
+    public String getID() {
         return getBundle().getSymbolicName();
     }
 

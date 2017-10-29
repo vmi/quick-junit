@@ -21,79 +21,79 @@ import org.eclipse.jdt.junit.model.ITestElement.Result;
 
 @SuppressWarnings("deprecation")
 public class TestListenerForGrowl implements ITestRunListener {
-	
-	private static final String QUICK_J_UNIT = "Quick JUnit ";
-	private static final String TEST_OK = QUICK_J_UNIT + "Test OK";
-	private static final String TEST_FAILURE = QUICK_J_UNIT + "Test FAILURE";
-	private static final String TEST_ERROR = QUICK_J_UNIT + "Test ERROR";
 
-	public TestListenerForGrowl() {
-		final Growl growl = GrowlUtils.getGrowlInstance(QUICK_J_UNIT);
-		growl.addNotification(TEST_OK, true);
-		growl.addNotification(TEST_FAILURE, true);
-		growl.addNotification(TEST_ERROR, true);
-		try {
-			growl.register();
-		} catch (GrowlException e) {
-		}
+    private static final String QUICK_J_UNIT = "Quick JUnit ";
+    private static final String TEST_OK = QUICK_J_UNIT + "Test OK";
+    private static final String TEST_FAILURE = QUICK_J_UNIT + "Test FAILURE";
+    private static final String TEST_ERROR = QUICK_J_UNIT + "Test ERROR";
 
-		JUnitCore.addTestRunListener(new org.eclipse.jdt.junit.TestRunListener() {
-			private TemplateParser parser = new TemplateParser();
-			@Override
-			public void sessionFinished(ITestRunSession session) {
-				String template = Preference.TEMPLATE.getValue();
-				parser.setTemplate(template);
-				RenderedImage icon;
-				Result testResult = session.getTestResult(true);
-				InputStream input;
-				String notification;
-				if(Result.ERROR.equals(testResult)){
-					notification = TEST_ERROR;
-					input = getClass().getResourceAsStream("/icons/tsuiteerror.gif");
-				}else if(Result.FAILURE.equals(testResult)){
-					notification = TEST_FAILURE;
-					input = getClass().getResourceAsStream("/icons/tsuitefail.gif");
-				}else{
-					notification = TEST_OK;
-					input = getClass().getResourceAsStream("/icons/tsuiteok.gif");					
-				}
-				String parseTemplate = parser.parseTemplate(session);
-				try {
-					icon = ImageIO.read(input);
-					growl.sendNotification(notification, testResult.toString(), parseTemplate, icon);
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (GrowlException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public TestListenerForGrowl() {
+        final Growl growl = GrowlUtils.getGrowlInstance(QUICK_J_UNIT);
+        growl.addNotification(TEST_OK, true);
+        growl.addNotification(TEST_FAILURE, true);
+        growl.addNotification(TEST_ERROR, true);
+        try {
+            growl.register();
+        } catch (GrowlException e) {
+        }
 
-	public void testEnded(String testId, String testName) {
-	}
+        JUnitCore.addTestRunListener(new org.eclipse.jdt.junit.TestRunListener() {
+            private TemplateParser parser = new TemplateParser();
+            @Override
+            public void sessionFinished(ITestRunSession session) {
+                String template = Preference.TEMPLATE.getValue();
+                parser.setTemplate(template);
+                RenderedImage icon;
+                Result testResult = session.getTestResult(true);
+                InputStream input;
+                String notification;
+                if(Result.ERROR.equals(testResult)){
+                    notification = TEST_ERROR;
+                    input = getClass().getResourceAsStream("/icons/tsuiteerror.gif");
+                }else if(Result.FAILURE.equals(testResult)){
+                    notification = TEST_FAILURE;
+                    input = getClass().getResourceAsStream("/icons/tsuitefail.gif");
+                }else{
+                    notification = TEST_OK;
+                    input = getClass().getResourceAsStream("/icons/tsuiteok.gif");
+                }
+                String parseTemplate = parser.parseTemplate(session);
+                try {
+                    icon = ImageIO.read(input);
+                    growl.sendNotification(notification, testResult.toString(), parseTemplate, icon);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (GrowlException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	public void testFailed(int status, String testId, String testName,
-			String trace) {
-	}
+    public void testEnded(String testId, String testName) {
+    }
 
-	public void testReran(String testId, String testClass, String testName,
-			int status, String trace) {
-	}
+    public void testFailed(int status, String testId, String testName,
+            String trace) {
+    }
 
-	public void testRunEnded(long elapsedTime) {
-	}
+    public void testReran(String testId, String testClass, String testName,
+            int status, String trace) {
+    }
 
-	public void testRunStarted(int testCount) {
-	}
+    public void testRunEnded(long elapsedTime) {
+    }
 
-	public void testRunStopped(long elapsedTime) {
-	}
+    public void testRunStarted(int testCount) {
+    }
 
-	public void testRunTerminated() {
-	}
+    public void testRunStopped(long elapsedTime) {
+    }
 
-	public void testStarted(String testId, String testName) {
-	}
+    public void testRunTerminated() {
+    }
+
+    public void testStarted(String testId, String testName) {
+    }
 
 }

@@ -13,44 +13,44 @@ import org.eclipse.mylyn.commons.notifications.ui.NotificationsUi;
 
 @SuppressWarnings("restriction")
 public class TestNotificationListener extends TestRunListener {
-	private static final String QUICK_JUNIT_NOTIFICATION_EVENT_ID = "junit.extensions.eclipse.quick.notifications.event";
+    private static final String QUICK_JUNIT_NOTIFICATION_EVENT_ID = "junit.extensions.eclipse.quick.notifications.event";
 
-	public TestNotificationListener() {
+    public TestNotificationListener() {
 
-		JUnitCore.addTestRunListener(new org.eclipse.jdt.junit.TestRunListener() {
-			@Override
-			public void sessionFinished(ITestRunSession session) {
-				Result testResult = session.getTestResult(true);
-				AbstractNotification notification = new JUnitNotification(QUICK_JUNIT_NOTIFICATION_EVENT_ID, testResult, session);
-				NotificationsUi.getService().notify(Collections.singletonList(notification));
-			}
-		});
-	}
+        JUnitCore.addTestRunListener(new org.eclipse.jdt.junit.TestRunListener() {
+            @Override
+            public void sessionFinished(ITestRunSession session) {
+                Result testResult = session.getTestResult(true);
+                AbstractNotification notification = new JUnitNotification(QUICK_JUNIT_NOTIFICATION_EVENT_ID, testResult, session);
+                NotificationsUi.getService().notify(Collections.singletonList(notification));
+            }
+        });
+    }
 
-	public void testEnded(String testId, String testName) {
-	}
+    public void testEnded(String testId, String testName) {
+    }
 
-	public void testFailed(int status, String testId, String testName,
-			String trace) {
-	}
+    public void testFailed(int status, String testId, String testName,
+            String trace) {
+    }
 
-	public void testReran(String testId, String testClass, String testName,
-			int status, String trace) {
-	}
+    public void testReran(String testId, String testClass, String testName,
+            int status, String trace) {
+    }
 
-	public void testRunEnded(long elapsedTime) {
-	}
+    public void testRunEnded(long elapsedTime) {
+    }
 
-	public void testRunStarted(int testCount) {
-	}
+    public void testRunStarted(int testCount) {
+    }
 
-	public void testRunStopped(long elapsedTime) {
-	}
+    public void testRunStopped(long elapsedTime) {
+    }
 
-	public void testRunTerminated() {
-	}
+    public void testRunTerminated() {
+    }
 
-	public void testStarted(String testId, String testName) {
-	}
+    public void testStarted(String testId, String testName) {
+    }
 
 }

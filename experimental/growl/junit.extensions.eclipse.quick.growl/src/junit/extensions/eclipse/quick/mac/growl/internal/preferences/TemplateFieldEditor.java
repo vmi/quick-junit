@@ -34,7 +34,7 @@ public class TemplateFieldEditor extends FieldEditor {
 
     /**
      * Validation strategy constant (value <code>1</code>) indicating that
-     * the editor should perform validation only when the text widget 
+     * the editor should perform validation only when the text widget
      * loses focus.
      *
      * @see #setValidateStrategy
@@ -67,7 +67,7 @@ public class TemplateFieldEditor extends FieldEditor {
      * Width of text field in characters; initially unlimited.
      */
     @SuppressWarnings("unused")
-	private int widthInChars = UNLIMITED;
+    private int widthInChars = UNLIMITED;
 
     /**
      * Text limit of text field in characters; initially unlimited.
@@ -86,13 +86,13 @@ public class TemplateFieldEditor extends FieldEditor {
     private boolean emptyStringAllowed = true;
 
     /**
-     * The validation strategy; 
+     * The validation strategy;
      * <code>VALIDATE_ON_KEY_STROKE</code> by default.
      */
     private int validateStrategy = VALIDATE_ON_KEY_STROKE;
 
     /**
-     * Creates a new string field editor 
+     * Creates a new string field editor
      */
     protected TemplateFieldEditor() {
     }
@@ -100,7 +100,7 @@ public class TemplateFieldEditor extends FieldEditor {
     /**
      * Creates a string field editor.
      * Use the method <code>setTextLimit</code> to limit the text.
-     * 
+     *
      * @param name the name of the preference this field editor works on
      * @param labelText the label text of the field editor
      * @param width the width of the text input field in characters,
@@ -125,7 +125,7 @@ public class TemplateFieldEditor extends FieldEditor {
     /**
      * Creates a string field editor.
      * Use the method <code>setTextLimit</code> to limit the text.
-     * 
+     *
      * @param name the name of the preference this field editor works on
      * @param labelText the label text of the field editor
      * @param width the width of the text input field in characters,
@@ -140,7 +140,7 @@ public class TemplateFieldEditor extends FieldEditor {
     /**
      * Creates a string field editor of unlimited width.
      * Use the method <code>setTextLimit</code> to limit the text.
-     * 
+     *
      * @param name the name of the preference this field editor works on
      * @param labelText the label text of the field editor
      * @param parent the parent of the field editor's control
@@ -170,12 +170,12 @@ public class TemplateFieldEditor extends FieldEditor {
     protected boolean checkState() {
         boolean result = false;
         if (emptyStringAllowed) {
-			result = true;
-		}
+            result = true;
+        }
 
         if (textField == null) {
-			result = false;
-		}
+            result = false;
+        }
 
         String txt = textField.getText();
 
@@ -185,10 +185,10 @@ public class TemplateFieldEditor extends FieldEditor {
         result = result && doCheckState();
 
         if (result) {
-			clearErrorMessage();
-		} else {
-			showErrorMessage(errorMessage);
-		}
+            clearErrorMessage();
+        } else {
+            showErrorMessage(errorMessage);
+        }
 
         return result;
     }
@@ -197,7 +197,7 @@ public class TemplateFieldEditor extends FieldEditor {
      * Hook for subclasses to do specific state checks.
      * <p>
      * The default implementation of this framework method does
-     * nothing and returns <code>true</code>.  Subclasses should 
+     * nothing and returns <code>true</code>.  Subclasses should
      * override this method to specific state checks.
      * </p>
      *
@@ -234,15 +234,15 @@ public class TemplateFieldEditor extends FieldEditor {
 //            gd.horizontalAlignment = GridData.FILL;
 //            gd.grabExcessHorizontalSpace = true;
 //        }
-		GC gc = new GC(textField);
-		try {
-			Point textExtent = gc.textExtent("X");//$NON-NLS-1$
-			gd.heightHint = textExtent.y * 3;
-			gd.horizontalAlignment = GridData.FILL;
-			gd.grabExcessHorizontalSpace = true;
-		} finally{
-			gc.dispose();
-		}
+        GC gc = new GC(textField);
+        try {
+            Point textExtent = gc.textExtent("X");//$NON-NLS-1$
+            gd.heightHint = textExtent.y * 3;
+            gd.horizontalAlignment = GridData.FILL;
+            gd.grabExcessHorizontalSpace = true;
+        } finally{
+            gc.dispose();
+        }
 
         textField.setLayoutData(gd);
     }
@@ -278,7 +278,7 @@ public class TemplateFieldEditor extends FieldEditor {
     }
 
     /**
-     * Returns the error message that will be displayed when and if 
+     * Returns the error message that will be displayed when and if
      * an error occurs.
      *
      * @return the error message, or <code>null</code> if none
@@ -301,9 +301,9 @@ public class TemplateFieldEditor extends FieldEditor {
      */
     public String getStringValue() {
         if (textField != null) {
-			return textField.getText();
-		}
-        
+            return textField.getText();
+        }
+
         return getPreferenceStore().getString(getPreferenceName());
     }
 
@@ -342,14 +342,14 @@ public class TemplateFieldEditor extends FieldEditor {
                     }
                 });
                 textField.addFocusListener(new FocusAdapter() {
-                	// Ensure that the value is checked on focus loss in case we
-                	// missed a keyRelease or user hasn't released key.
-                	// See https://bugs.eclipse.org/bugs/show_bug.cgi?id=214716
+                    // Ensure that the value is checked on focus loss in case we
+                    // missed a keyRelease or user hasn't released key.
+                    // See https://bugs.eclipse.org/bugs/show_bug.cgi?id=214716
                     public void focusLost(FocusEvent e) {
                         valueChanged();
                     }
                 });
- 
+
 
                 break;
             case VALIDATE_ON_FOCUS_LOST:
@@ -422,7 +422,7 @@ public class TemplateFieldEditor extends FieldEditor {
     }
 
     /**
-     * Sets the error message that will be displayed when and if 
+     * Sets the error message that will be displayed when and if
      * an error occurs.
      *
      * @param message the error message
@@ -448,8 +448,8 @@ public class TemplateFieldEditor extends FieldEditor {
     public void setStringValue(String value) {
         if (textField != null) {
             if (value == null) {
-				value = "";//$NON-NLS-1$
-			}
+                value = "";//$NON-NLS-1$
+            }
             oldValue = textField.getText();
             if (!oldValue.equals(value)) {
                 textField.setText(value);
@@ -468,8 +468,8 @@ public class TemplateFieldEditor extends FieldEditor {
     public void setTextLimit(int limit) {
         textLimit = limit;
         if (textField != null) {
-			textField.setTextLimit(limit);
-		}
+            textField.setTextLimit(limit);
+        }
     }
 
     /**
@@ -477,7 +477,7 @@ public class TemplateFieldEditor extends FieldEditor {
      * <p>
      * Calling this method has no effect after <code>createPartControl</code>
      * is called. Thus this method is really only useful for subclasses to call
-     * in their constructor. However, it has public visibility for backward 
+     * in their constructor. However, it has public visibility for backward
      * compatibility.
      * </p>
      *
@@ -503,7 +503,7 @@ public class TemplateFieldEditor extends FieldEditor {
      * to the value (<code>VALUE</code> property) provided that the old and
      * new values are different.
      * <p>
-     * This hook is <em>not</em> called when the text is initialized 
+     * This hook is <em>not</em> called when the text is initialized
      * (or reset to the default value) from the preference store.
      * </p>
      */
@@ -513,8 +513,8 @@ public class TemplateFieldEditor extends FieldEditor {
         refreshValidState();
 
         if (isValid != oldState) {
-			fireStateChanged(IS_VALID, oldState, isValid);
-		}
+            fireStateChanged(IS_VALID, oldState, isValid);
+        }
 
         String newValue = textField.getText();
         if (!newValue.equals(oldValue)) {

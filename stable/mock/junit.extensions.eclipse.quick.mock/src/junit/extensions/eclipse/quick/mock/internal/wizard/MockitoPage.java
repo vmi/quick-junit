@@ -18,50 +18,50 @@ import org.eclipse.swt.widgets.Label;
 
 public class MockitoPage extends WizardPage implements IClasspathContainerPage,IClasspathContainerPageExtension {
 
-	private MockitoEntry entry;
-	private IJavaProject project;
+    private MockitoEntry entry;
+    private IJavaProject project;
 
-	public MockitoPage() {
-		super("mockitoPage"); //$NON-NLS-1$
-		setTitle("Mockito Library"); //$NON-NLS-1$
-		setDescription(Messages.MockitoPage_AddMockitoLibrary);
-		entry = new MockitoEntry();
-	}
-	
-	public boolean finish() {
-		try {
-			IJavaProject[] javaProjects= new IJavaProject[] { project };
-			IClasspathContainer[] containers= { null };
-			JavaCore.setClasspathContainer(entry.getContainerPath(), javaProjects, containers, null);
-		} catch (JavaModelException e) {
-			return false;
-		}
+    public MockitoPage() {
+        super("mockitoPage"); //$NON-NLS-1$
+        setTitle("Mockito Library"); //$NON-NLS-1$
+        setDescription(Messages.MockitoPage_AddMockitoLibrary);
+        entry = new MockitoEntry();
+    }
 
-		return true;
-	}
+    public boolean finish() {
+        try {
+            IJavaProject[] javaProjects= new IJavaProject[] { project };
+            IClasspathContainer[] containers= { null };
+            JavaCore.setClasspathContainer(entry.getContainerPath(), javaProjects, containers, null);
+        } catch (JavaModelException e) {
+            return false;
+        }
 
-	public IClasspathEntry getSelection() {
-		return entry.getContainer();
-	}
+        return true;
+    }
 
-	public void setSelection(IClasspathEntry containerEntry) {
-	}
+    public IClasspathEntry getSelection() {
+        return entry.getContainer();
+    }
 
-	public void createControl(Composite parent) {
-		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		composite.setLayout(new GridLayout(1, false));
-		
-		Label label = new Label(composite, SWT.NONE);
-		label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false,
-				false));
-		label.setText(Messages.MockitoPage_AddedLabel);
-		setControl(composite);
-	}
+    public void setSelection(IClasspathEntry containerEntry) {
+    }
 
-	public void initialize(IJavaProject project,
-			IClasspathEntry[] currentEntries) {
-		this.project = project;
-	}
+    public void createControl(Composite parent) {
+        Composite composite = new Composite(parent, SWT.NONE);
+        composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        composite.setLayout(new GridLayout(1, false));
+
+        Label label = new Label(composite, SWT.NONE);
+        label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false,
+                false));
+        label.setText(Messages.MockitoPage_AddedLabel);
+        setControl(composite);
+    }
+
+    public void initialize(IJavaProject project,
+            IClasspathEntry[] currentEntries) {
+        this.project = project;
+    }
 
 }

@@ -6,7 +6,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
 public class QuickJUnitException extends CoreException {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     public QuickJUnitException(Throwable cause) {
         this(cause.getMessage(), cause);

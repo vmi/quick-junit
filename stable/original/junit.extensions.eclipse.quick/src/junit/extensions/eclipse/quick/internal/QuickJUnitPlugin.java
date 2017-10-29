@@ -16,7 +16,7 @@ import org.osgi.framework.Constants;
 
 
 public class QuickJUnitPlugin extends AbstractUIPlugin {
-	
+
     private static QuickJUnitPlugin plugin;
 
     public QuickJUnitPlugin() {
@@ -44,7 +44,7 @@ public class QuickJUnitPlugin extends AbstractUIPlugin {
         if (message == null)
             message = ""; //$NON-NLS-1$
         MultiStatus errorStatus = new MultiStatus(getID(), severity, message, ex);
-        
+
         Dictionary headers = getBundle().getHeaders();
 
         String providerName = "" + headers.get(Constants.BUNDLE_VENDOR);
@@ -69,7 +69,7 @@ public class QuickJUnitPlugin extends AbstractUIPlugin {
 
         return errorStatus;
     }
-    
+
     public IStatus createStatus(int severity, String message) {
         return createStatus(severity, message, 0, null);
     }
@@ -77,7 +77,7 @@ public class QuickJUnitPlugin extends AbstractUIPlugin {
     private IStatus createStatus(int severity, String message, int code, Exception ex) {
         return new Status(severity, getID(), code, message, ex);
     }
-    
+
     public void handleSystemError(Exception ex, Object caller) {
         IStatus status = createSystemErrorStatus(ex, caller);
         getLog().log(status);
@@ -97,9 +97,9 @@ public class QuickJUnitPlugin extends AbstractUIPlugin {
     public String getID() {
         return getBundle().getSymbolicName();
     }
-    
-	public ILaunchManager getLaunchManager() {
-		return DebugPlugin.getDefault().getLaunchManager();
-	}
+
+    public ILaunchManager getLaunchManager() {
+        return DebugPlugin.getDefault().getLaunchManager();
+    }
 
 }

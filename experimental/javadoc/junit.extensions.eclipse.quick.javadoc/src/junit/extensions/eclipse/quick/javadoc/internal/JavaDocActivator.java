@@ -13,27 +13,27 @@ import org.osgi.framework.Constants;
 
 public class JavaDocActivator extends Plugin {
 
-	public static final String PLUGIN_ID = "junit.extensions.eclipse.quick.javadoc";
+    public static final String PLUGIN_ID = "junit.extensions.eclipse.quick.javadoc";
 
-	private static JavaDocActivator plugin;
-	
-	public JavaDocActivator() {
-	}
+    private static JavaDocActivator plugin;
 
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
-	}
+    public JavaDocActivator() {
+    }
 
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-		super.stop(context);
-	}
+    public void start(BundleContext context) throws Exception {
+        super.start(context);
+        plugin = this;
+    }
 
-	public static JavaDocActivator getDefault() {
-		return plugin;
-	}
-	
+    public void stop(BundleContext context) throws Exception {
+        plugin = null;
+        super.stop(context);
+    }
+
+    public static JavaDocActivator getDefault() {
+        return plugin;
+    }
+
     public IStatus createSystemErrorStatus(Exception ex, Object caller) {
         int severity = IStatus.ERROR;
 
@@ -42,7 +42,7 @@ public class JavaDocActivator extends Plugin {
         if (message == null)
             message = ""; //$NON-NLS-1$
         MultiStatus errorStatus = new MultiStatus(getID(), severity, message, ex);
-        
+
         Dictionary<?, ?> headers = getBundle().getHeaders();
 
         String providerName = "" + headers.get(Constants.BUNDLE_VENDOR);
@@ -75,7 +75,7 @@ public class JavaDocActivator extends Plugin {
     private IStatus createStatus(int severity, String message, int code, Exception ex) {
         return new Status(severity, getID(), code, message, ex);
     }
-    
+
     public void handleSystemError(Exception e, Object caller) {
         IStatus status = createSystemErrorStatus(e, caller);
         getLog().log(status);

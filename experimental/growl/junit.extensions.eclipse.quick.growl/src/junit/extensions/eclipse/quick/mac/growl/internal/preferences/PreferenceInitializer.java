@@ -13,9 +13,9 @@ import static junit.extensions.eclipse.quick.mac.growl.internal.preferences.Pref
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
-	public void initializeDefaultPreferences() {
-		IPreferenceStore store = GrowlActivator.getDefault().getPreferenceStore();
-		store.setDefault(TEMPLATE.name(), "${name} passed:${ok_counts} failure:${fail_counts} Total:${total_counts}"); //$NON-NLS-1$
-	}
+    public void initializeDefaultPreferences() {
+        IPreferenceStore store = GrowlActivator.getDefault().getPreferenceStore();
+        store.setDefault(TEMPLATE.name(), "${name} passed:${ok_counts} failure:${fail_counts} Total:${total_counts}"); //$NON-NLS-1$
+    }
 
 }

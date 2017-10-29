@@ -127,17 +127,17 @@ public class PopupTableSelector {
         dialog.setLocation(dialogBounds.x, dialogBounds.y);
 
 /*        
-		table.removeHelpListener(getHelpListener());
-		table.addHelpListener(new HelpListener() {
-			public void helpRequested(HelpEvent event) {
-				// Do nothing
-			}
-		});
+        table.removeHelpListener(getHelpListener());
+        table.addHelpListener(new HelpListener() {
+            public void helpRequested(HelpEvent event) {
+                // Do nothing
+            }
+        });
 */
-				
-		/* Fetch the key bindings for the forward and backward commands.  They will not
-		 * change while the dialog is open, but the context will.  Bug 55581.
-		 */
+                
+        /* Fetch the key bindings for the forward and backward commands.  They will not
+         * change while the dialog is open, but the context will.  Bug 55581.
+         */
         final IBindingService bindingService = (IBindingService) PlatformUI.getWorkbench()
                 .getAdapter(IBindingService.class);
 
@@ -148,22 +148,22 @@ public class PopupTableSelector {
             backwardTriggerSequences = bindingService.getActiveBindingsFor(commandBackward);
         }
 
-//		final IWorkbenchContextSupport contextSupport = page.getWorkbenchWindow().getWorkbench().getContextSupport();
-		try {
-			dialog.open();
-			addMouseListener(table, dialog);
-//			contextSupport.registerShell(dialog, IWorkbenchContextSupport.TYPE_NONE);
-			addKeyListener(table, dialog);
-			addTraverseListener(table);
+//      final IWorkbenchContextSupport contextSupport = page.getWorkbenchWindow().getWorkbench().getContextSupport();
+        try {
+            dialog.open();
+            addMouseListener(table, dialog);
+//          contextSupport.registerShell(dialog, IWorkbenchContextSupport.TYPE_NONE);
+            addKeyListener(table, dialog);
+            addTraverseListener(table);
 
-			while (!dialog.isDisposed())
-				if (!display.readAndDispatch())
-					display.sleep();
-		} finally {
-			if (!dialog.isDisposed())
-				cancel(dialog);
-//			contextSupport.unregisterShell(dialog);
-		}
+            while (!dialog.isDisposed())
+                if (!display.readAndDispatch())
+                    display.sleep();
+        } finally {
+            if (!dialog.isDisposed())
+                cancel(dialog);
+//          contextSupport.unregisterShell(dialog);
+        }
         return selection;
     }
 
@@ -192,26 +192,26 @@ public class PopupTableSelector {
             }
         });
     }
-	/**
-	 * Adds a listener to the given table that blocks all traversal operations.
-	 * 
-	 * @param table
-	 *            The table to which the traversal suppression should be added;
-	 *            must not be <code>null</code>.
-	 */
-	private final void addTraverseListener(final Table table) {
-		table.addTraverseListener(new TraverseListener() {
-			/**
-			 * Blocks all key traversal events.
-			 * 
-			 * @param event
-			 *            The trigger event; must not be <code>null</code>.
-			 */
-			public final void keyTraversed(final TraverseEvent event) {
-				event.doit = false;
-			}
-		});
-	}
+    /**
+     * Adds a listener to the given table that blocks all traversal operations.
+     * 
+     * @param table
+     *            The table to which the traversal suppression should be added;
+     *            must not be <code>null</code>.
+     */
+    private final void addTraverseListener(final Table table) {
+        table.addTraverseListener(new TraverseListener() {
+            /**
+             * Blocks all key traversal events.
+             * 
+             * @param event
+             *            The trigger event; must not be <code>null</code>.
+             */
+            public final void keyTraversed(final TraverseEvent event) {
+                event.doit = false;
+            }
+        });
+    }
 
     private void addKeyListener(final Table table, final Shell dialog) {
         table.addKeyListener(new KeyListener() {
@@ -224,10 +224,10 @@ public class PopupTableSelector {
                 int accelerator = SWTKeySupport.convertEventToUnmodifiedAccelerator(e);
                 KeyStroke keyStroke = SWTKeySupport.convertAcceleratorToKeyStroke(accelerator);
     
-				//System.out.println("\nPRESSED");
-				//printKeyEvent(e);
-				//System.out.println("accelerat:\t" + accelerator + "\t (" +
-				// KeySupport.formatStroke(Stroke.create(accelerator), true) +
+                //System.out.println("\nPRESSED");
+                //printKeyEvent(e);
+                //System.out.println("accelerat:\t" + accelerator + "\t (" +
+                // KeySupport.formatStroke(Stroke.create(accelerator), true) +
                 // ")");
                     
                 boolean acceleratorForward = false;
@@ -269,51 +269,51 @@ public class PopupTableSelector {
                     }
                 }
 
-				if (character == SWT.CR || character == SWT.LF)
-					ok(dialog, table);
-				else if (acceleratorForward) {
-					if (firstKey && e.stateMask != 0)
-						quickReleaseMode = true;
+                if (character == SWT.CR || character == SWT.LF)
+                    ok(dialog, table);
+                else if (acceleratorForward) {
+                    if (firstKey && e.stateMask != 0)
+                        quickReleaseMode = true;
 
-					int index = table.getSelectionIndex();
-					table.setSelection((index + 1) % table.getItemCount());
-				} else if (acceleratorBackward) {
-					if (firstKey && e.stateMask != 0)
-						quickReleaseMode = true;
+                    int index = table.getSelectionIndex();
+                    table.setSelection((index + 1) % table.getItemCount());
+                } else if (acceleratorBackward) {
+                    if (firstKey && e.stateMask != 0)
+                        quickReleaseMode = true;
 
-					int index = table.getSelectionIndex();
-					table.setSelection(index >= 1 ? index - 1 : table.getItemCount() - 1);
-				} else if (
-					keyCode != SWT.ALT
-						&& keyCode != SWT.COMMAND
-						&& keyCode != SWT.CTRL
-						&& keyCode != SWT.SHIFT
-						&& keyCode != SWT.ARROW_DOWN
-						&& keyCode != SWT.ARROW_UP
-						&& keyCode != SWT.ARROW_LEFT
-						&& keyCode != SWT.ARROW_RIGHT)
-					cancel(dialog);
-				firstKey = false;
+                    int index = table.getSelectionIndex();
+                    table.setSelection(index >= 1 ? index - 1 : table.getItemCount() - 1);
+                } else if (
+                    keyCode != SWT.ALT
+                        && keyCode != SWT.COMMAND
+                        && keyCode != SWT.CTRL
+                        && keyCode != SWT.SHIFT
+                        && keyCode != SWT.ARROW_DOWN
+                        && keyCode != SWT.ARROW_UP
+                        && keyCode != SWT.ARROW_LEFT
+                        && keyCode != SWT.ARROW_RIGHT)
+                    cancel(dialog);
+                firstKey = false;
             }
                 
             public void keyReleased(KeyEvent e) {
-				int keyCode = e.keyCode;
-				int stateMask = e.stateMask;
-				//char character = e.character;
-				//int accelerator = stateMask | (keyCode != 0 ? keyCode :
-				// convertCharacter(character));
+                int keyCode = e.keyCode;
+                int stateMask = e.stateMask;
+                //char character = e.character;
+                //int accelerator = stateMask | (keyCode != 0 ? keyCode :
+                // convertCharacter(character));
 
-				//System.out.println("\nRELEASED");
-				//printKeyEvent(e);
-				//System.out.println("accelerat:\t" + accelerator + "\t (" +
-				// KeySupport.formatStroke(Stroke.create(accelerator), true) +
-				// ")");
+                //System.out.println("\nRELEASED");
+                //printKeyEvent(e);
+                //System.out.println("accelerat:\t" + accelerator + "\t (" +
+                // KeySupport.formatStroke(Stroke.create(accelerator), true) +
+                // ")");
 
                 final IPreferencesService service = Platform.getPreferencesService();
                 final boolean stickyCycle = service.getBoolean(
                         "org.eclipse.ui.workbench", "STICKY_CYCLE", false, null); //$NON-NLS-1$ //$NON-NLS-2$
-				if ((!stickyCycle && (firstKey || quickReleaseMode)) && keyCode == stateMask)
-					ok(dialog, table);
+                if ((!stickyCycle && (firstKey || quickReleaseMode)) && keyCode == stateMask)
+                    ok(dialog, table);
             }
         });
     }

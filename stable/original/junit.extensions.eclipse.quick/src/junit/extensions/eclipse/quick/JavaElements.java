@@ -52,11 +52,11 @@ public class JavaElements {
             throws JavaModelException {
         while (element != null) {
             if (isTestMethod(element)){
-            	IType declaringType = ((IMethod) element).getDeclaringType();
-            	if(hasParameterizedAnnotation(declaringType)){
-					return declaringType;
-            	}
-            	return element;
+                IType declaringType = ((IMethod) element).getDeclaringType();
+                if(hasParameterizedAnnotation(declaringType)){
+                    return declaringType;
+                }
+                return element;
             }
             
             if (isTestRunnerPassibleClass(element)) {
@@ -74,16 +74,16 @@ public class JavaElements {
     private static boolean hasParameterizedAnnotation(IType type) throws JavaModelException {
         String source = type.getSource();
         if(source == null) return false;
-		return source.indexOf("Parameterized") != -1;
-	}
+        return source.indexOf("Parameterized") != -1;
+    }
 
-	private static boolean hasSuiteAnnotation(IType type) throws JavaModelException {
+    private static boolean hasSuiteAnnotation(IType type) throws JavaModelException {
         String source = type.getSource();
         if(source == null) return false;
-		return source.indexOf("@SuiteClasses") != -1 && source.indexOf("Suite.class") != -1;
-	}
+        return source.indexOf("@SuiteClasses") != -1 && source.indexOf("Suite.class") != -1;
+    }
 
-	private static boolean isTestRunnerPassibleClass(IJavaElement element) throws JavaModelException {
+    private static boolean isTestRunnerPassibleClass(IJavaElement element) throws JavaModelException {
         if (!(element instanceof IType))
             return false;
         IType type = (IType) element;

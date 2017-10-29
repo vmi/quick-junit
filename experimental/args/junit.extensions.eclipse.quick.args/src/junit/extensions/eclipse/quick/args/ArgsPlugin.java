@@ -11,37 +11,37 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 
 public class ArgsPlugin extends AbstractUIPlugin {
-	
-	private static ArgsPlugin plugin;
 
-	public ArgsPlugin() {
-		ArgsPlugin.plugin = this;
-	}
+    private static ArgsPlugin plugin;
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
-	 */
-	public void start(BundleContext bundleContext) throws Exception {
-		super.start(bundleContext);
-	}
+    public ArgsPlugin() {
+        ArgsPlugin.plugin = this;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext bundleContext) throws Exception {
-		super.stop(bundleContext);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
+     */
+    public void start(BundleContext bundleContext) throws Exception {
+        super.start(bundleContext);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+     */
+    public void stop(BundleContext bundleContext) throws Exception {
+        super.stop(bundleContext);
+    }
 
     protected void initializeImageRegistry(ImageRegistry reg) {
-    	reg.put("over_error", imageDescriptorFromPlugin(getID(), "icon/ovr16/error.gif"));
+        reg.put("over_error", imageDescriptorFromPlugin(getID(), "icon/ovr16/error.gif"));
     }
-	
-	public static ArgsPlugin getPlugin() {
-		return plugin;
-	}
-	
+
+    public static ArgsPlugin getPlugin() {
+        return plugin;
+    }
+
     public void logSystemError(Exception ex, Object caller) {
         IStatus status = createSystemErrorStatus(ex, caller);
         getLog().log(status);
@@ -55,9 +55,9 @@ public class ArgsPlugin extends AbstractUIPlugin {
         if (message == null)
             message = ""; //$NON-NLS-1$
         MultiStatus errorStatus = new MultiStatus(getID(), severity, message, ex);
-        
+
         @SuppressWarnings("rawtypes")
-		Dictionary headers = getBundle().getHeaders();
+        Dictionary headers = getBundle().getHeaders();
 
         String providerName = "" + headers.get(Constants.BUNDLE_VENDOR);
         message = "Provider Name:.... " + providerName; //$NON-NLS-1$
@@ -81,7 +81,7 @@ public class ArgsPlugin extends AbstractUIPlugin {
 
         return errorStatus;
     }
-    
+
     public IStatus createStatus(int severity, String message) {
         return createStatus(severity, message, 0, null);
     }

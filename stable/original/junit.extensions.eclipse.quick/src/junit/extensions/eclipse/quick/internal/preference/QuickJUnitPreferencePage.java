@@ -29,23 +29,23 @@ public class QuickJUnitPreferencePage extends PreferencePage implements IWorkben
         IPreferenceStore store = getPreferenceStore();
         namingRules = new NamingRules(store);
         namingRulesPreference = new NamingRulesPreference(this);
-	}
+    }
 
-	protected Control createContents(Composite parent)  {
+    protected Control createContents(Composite parent)  {
         // TODO implements source folder feature.
-//	    Composite sourceFolderComposite = new Composite(parent, SWT.NULL);
-//	    GridLayout sfLayout = new GridLayout(2, false);
+//      Composite sourceFolderComposite = new Composite(parent, SWT.NULL);
+//      GridLayout sfLayout = new GridLayout(2, false);
 //        sfLayout.marginHeight = 0;
 //        sfLayout.marginWidth = 0;
-//	    sourceFolderComposite.setLayout(sfLayout);
-//	    GridData sfGData = new GridData(GridData.FILL_HORIZONTAL);
-//	    sourceFolderComposite.setLayoutData(sfGData);
-//	    Label label = new Label(sourceFolderComposite, SWT.NONE);
-//	    label.setText("testCase source folder;");
-//	    Text text = new Text(sourceFolderComposite, SWT.BORDER);
-//	    GridData textGData = new GridData(GridData.FILL_HORIZONTAL);
-//	    text.setLayoutData(textGData);
-//	    text.setText("${project}/src");
+//      sourceFolderComposite.setLayout(sfLayout);
+//      GridData sfGData = new GridData(GridData.FILL_HORIZONTAL);
+//      sourceFolderComposite.setLayoutData(sfGData);
+//      Label label = new Label(sourceFolderComposite, SWT.NONE);
+//      label.setText("testCase source folder;");
+//      Text text = new Text(sourceFolderComposite, SWT.BORDER);
+//      GridData textGData = new GridData(GridData.FILL_HORIZONTAL);
+//      text.setLayoutData(textGData);
+//      text.setText("${project}/src");
 
         Composite composite= new Composite(parent, SWT.NULL);
         GridLayout layout= new GridLayout();
@@ -59,7 +59,7 @@ public class QuickJUnitPreferencePage extends PreferencePage implements IWorkben
         namingRulesPreference.create(namingRules.get(), composite);
         Dialog.applyDialogFont(composite);
         return composite;
-	}
+    }
 
     GridData getButtonGridData(Button button) {
         GridData gd= new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_BEGINNING);
