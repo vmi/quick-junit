@@ -56,7 +56,7 @@ class JUnitNotification extends AbstractUiNotification {
     }
 
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Object getAdapter(Class adapter) {
         if(adapter == null) return null;
         if(adapter.equals(Result.class)){

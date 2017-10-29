@@ -45,7 +45,7 @@ public class QuickJUnitPlugin extends AbstractUIPlugin {
             message = ""; //$NON-NLS-1$
         MultiStatus errorStatus = new MultiStatus(getID(), severity, message, ex);
 
-        Dictionary headers = getBundle().getHeaders();
+        Dictionary<?, ?> headers = getBundle().getHeaders();
 
         String providerName = "" + headers.get(Constants.BUNDLE_VENDOR);
         message = Messages.getString("QuickJUnitPlugin.systemError.providerNameLabel") + providerName; //$NON-NLS-1$
@@ -63,7 +63,7 @@ public class QuickJUnitPlugin extends AbstractUIPlugin {
         message = Messages.getString("QuickJUnitPlugin.systemError.versionLabel") + version; //$NON-NLS-1$
         errorStatus.add(createStatus(severity, message));
 
-        Class klass = caller instanceof Class ? (Class) caller : caller.getClass();
+        Class<?> klass = caller instanceof Class ? (Class<?>) caller : caller.getClass();
         message = Messages.getString("QuickJUnitPlugin.systemError.classLabel") + klass.getName(); //$NON-NLS-1$
         errorStatus.add(createStatus(severity, message, IStatus.ERROR, ex));
 

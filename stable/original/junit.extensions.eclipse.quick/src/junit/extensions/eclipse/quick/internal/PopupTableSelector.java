@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jface.bindings.Trigger;
 import org.eclipse.jface.bindings.TriggerSequence;
 import org.eclipse.jface.bindings.keys.KeyStroke;
@@ -30,7 +31,7 @@ import org.eclipse.ui.keys.IBindingService;
 
 public class PopupTableSelector {
     private Shell shell;
-    private List items;
+    private List<IType> items;
     private Object selection;
     private TriggerSequence[] forwardTriggerSequences = null;
     private TriggerSequence[] backwardTriggerSequences = null;
@@ -41,7 +42,7 @@ public class PopupTableSelector {
     private boolean forward = true;
 
 
-    public PopupTableSelector(Shell shell, List items) {
+    public PopupTableSelector(Shell shell, List<IType> items) {
         this.shell = shell;
         this.items = items;
     }
@@ -137,7 +138,7 @@ public class PopupTableSelector {
         /* Fetch the key bindings for the forward and backward commands.  They will not
          * change while the dialog is open, but the context will.  Bug 55581.
          */
-        final IBindingService bindingService = (IBindingService) PlatformUI.getWorkbench()
+        final IBindingService bindingService = PlatformUI.getWorkbench()
                 .getAdapter(IBindingService.class);
 
         if (commandForward != null) {
@@ -166,7 +167,7 @@ public class PopupTableSelector {
         return selection;
     }
 
-    private void addItems(Table table, List items) {
+    private void addItems(Table table, List<IType> items) {
         TableItem tableItem = null;
         for (int i = 0; i < items.size(); ++i) {
             Object item = items.get(i);

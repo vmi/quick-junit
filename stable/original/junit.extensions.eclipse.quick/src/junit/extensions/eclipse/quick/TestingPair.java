@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TestingPair {
-    private List namingRules = new ArrayList();
+    private List<String> namingRules = new ArrayList<String>();
 
 
     public void addNamingRule(String rule) {
@@ -20,18 +20,18 @@ public class TestingPair {
     }
 
     public String[] getPairClassNames(String className) {
-        Set result = new LinkedHashSet();
+        Set<String> result = new LinkedHashSet<String>();
         className = chopInnerClassName(className);
         addTestedClassNames(className, result);
         if (result.isEmpty()) {
             addTestClassNames(className, result);
         }
-        return (String[]) result.toArray(new String[result.size()]);
+        return result.toArray(new String[result.size()]);
     }
 
-    private void addTestedClassNames(String className, Set result) {
+    private void addTestedClassNames(String className, Set<String> result) {
         for (int i = 0; i < namingRules.size(); ++i) {
-            String testedClassName = getTestedClassName(className, (String) namingRules.get(i));
+            String testedClassName = getTestedClassName(className, namingRules.get(i));
             if (testedClassName != null)
                 result.add(testedClassName);
         }
@@ -80,7 +80,7 @@ public class TestingPair {
         return null;
     }
 
-    private void addTestClassNames(String className, Set result) {
+    private void addTestClassNames(String className, Set<String> result) {
         String packageName, typeName;
         int index = className.lastIndexOf('.');
         if (index != -1) {
@@ -91,7 +91,7 @@ public class TestingPair {
             packageName = null;
         }
         for (int i = 0; i < namingRules.size(); ++i) {
-            result.add(getTestClassName(packageName, typeName, (String) namingRules.get(i)));
+            result.add(getTestClassName(packageName, typeName, namingRules.get(i)));
         }
     }
 

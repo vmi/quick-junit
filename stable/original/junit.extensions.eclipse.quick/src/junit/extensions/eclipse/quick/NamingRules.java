@@ -15,7 +15,7 @@ public class NamingRules {
         this.store = store;
     }
 
-    public List get() {
+    public List<Object> get() {
         String value = store.getString(STORE_ID);
         if (value == null || value.length() == 0)
             return getDefault();
@@ -23,23 +23,23 @@ public class NamingRules {
     }
 
     public String[] getEnableValues() {
-        List namingRules = get();
-        List result = new ArrayList();
+        List<Object> namingRules = get();
+        List<String> result = new ArrayList<String>();
         for (int i = 0; i < namingRules.size(); ++i) {
             NamingRule rule = (NamingRule) namingRules.get(i);
             if (rule.isEnabled()) {
                 result.add(rule.getValue());
             }
         }
-        return (String[]) result.toArray(new String[result.size()]);
+        return result.toArray(new String[result.size()]);
     }
 
 
-    public void set(List namingRules) {
+    public void set(List<Object> namingRules) {
         store.setValue(STORE_ID, listToString(namingRules));
     }
 
-    private String listToString(List namingRules) {
+    private String listToString(List<Object> namingRules) {
         StringBuffer buf = new StringBuffer();
         for (int i = 0; i < namingRules.size(); ++i) {
             if (i != 0)
@@ -50,8 +50,8 @@ public class NamingRules {
         return buf.toString();
     }
 
-    private List stringToList(String string) {
-        List result = new ArrayList();
+    private List<Object> stringToList(String string) {
+        List<Object> result = new ArrayList<Object>();
         StringTokenizer st = new StringTokenizer(string, ",");
         while(st.hasMoreTokens()) {
             String column = st.nextToken();
@@ -65,8 +65,8 @@ public class NamingRules {
         return result;
     }
 
-    public List getDefault() {
-        List result = new ArrayList();
+    public List<Object> getDefault() {
+        List<Object> result = new ArrayList<Object>();
         result.add(new NamingRule("${package}.${type}Test", true));
         result.add(new NamingRule("${package}.${type}PDETest", false));
         return result;

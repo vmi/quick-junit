@@ -42,7 +42,7 @@ public class PreferenceInitializer implements IStartup{
     }
 
     void initializeFavorites() {
-        Set imports = new LinkedHashSet(getJDTImports());
+        Set<String> imports = new LinkedHashSet<String>(getJDTImports());
         imports.addAll(getDefaultFavorites());
         String join = join(imports, SEMI_COLON);
         jdtPreferenceStore.setValue(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, join);
@@ -55,17 +55,17 @@ public class PreferenceInitializer implements IStartup{
     /**
      * @return the JDT favorite imports.
      */
-    public Set getJDTImports() {
+    public Set<String> getJDTImports() {
         String preference = jdtPreferenceStore.getString(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS);
         if (EMPTY.equals(preference.trim())) {
-            return new HashSet();
+            return new HashSet<String>();
         }
         String[] imports = preference.split(SEMI_COLON);
-        return new LinkedHashSet(Arrays.asList(imports));
+        return new LinkedHashSet<String>(Arrays.asList(imports));
     }
 
-    private LinkedHashSet getDefaultFavorites() {
-        LinkedHashSet orderedSet = new LinkedHashSet();
+    private LinkedHashSet<String> getDefaultFavorites() {
+        LinkedHashSet<String> orderedSet = new LinkedHashSet<String>();
         orderedSet.add(importStatement("org.hamcrest.MatcherAssert"));
         orderedSet.add(importStatement("org.hamcrest.CoreMatchers"));
         orderedSet.add(importStatement("org.junit.matchers.JUnitMatchers"));
@@ -81,11 +81,11 @@ public class PreferenceInitializer implements IStartup{
         return clazz + ".*"; //$NON-NLS-1$;
     }
 
-    private String join(Collection toJoin, String delimiter) {
+    private String join(Collection<String> toJoin, String delimiter) {
         if ((toJoin == null) || (toJoin.size() == 0))
             return "";
         StringBuffer result = new StringBuffer();
-        Iterator iterator = toJoin.iterator();
+        Iterator<String> iterator = toJoin.iterator();
         while(iterator.hasNext()){
             Object object = iterator.next();
             result.append(object);

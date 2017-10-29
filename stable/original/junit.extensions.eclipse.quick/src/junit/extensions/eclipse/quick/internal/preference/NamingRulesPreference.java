@@ -42,7 +42,7 @@ import org.eclipse.swt.widgets.TableColumn;
 public class NamingRulesPreference {
     private QuickJUnitPreferencePage preferencePage;
     private Shell shell;
-    private List namingRulesValue;
+    private List<Object> namingRulesValue;
 
     private CheckboxTableViewer tableViewer;
     private Button removeButton;
@@ -54,7 +54,7 @@ public class NamingRulesPreference {
         this.preferencePage = preferencePage;
     }
 
-    public void create(List namingRulesValue, Composite parent) {
+    public void create(List<Object> namingRulesValue, Composite parent) {
         this.namingRulesValue = namingRulesValue;
         shell = parent.getShell();
         Composite container= new Composite(parent, SWT.NONE);
@@ -70,12 +70,12 @@ public class NamingRulesPreference {
         update();
     }
 
-    public void setValue(List namingRulesValue) {
+    public void setValue(List<Object> namingRulesValue) {
         this.namingRulesValue = namingRulesValue;
         update();
     }
 
-    public List getValue() {
+    public List<Object> getValue() {
         return namingRulesValue;
     }
 
@@ -283,7 +283,7 @@ public class NamingRulesPreference {
         IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
         if (selection.isEmpty())
             return;
-        for (Iterator i = selection.iterator(); i.hasNext(); ) {
+        for (Iterator<?> i = selection.iterator(); i.hasNext(); ) {
              namingRulesValue.remove(i.next());
         }
         update();
