@@ -11,8 +11,9 @@
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
+  <artifactId>org.mockito</artifactId>
+  <version>1.9.5-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
-  <version>1.9.5</version>
 
   <build>
     <plugins>
@@ -38,5 +39,4 @@
       </plugin>
     </plugins>
   </build>
-  <artifactId>org.mockito</artifactId>
 </project>
