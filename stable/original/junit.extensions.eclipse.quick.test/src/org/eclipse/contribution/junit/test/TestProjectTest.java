@@ -55,6 +55,7 @@ public class TestProjectTest {
     }
 
     private void createAST(IType testClass) throws Exception {
+        @SuppressWarnings("deprecation") // TODO remove if upgrade supported Eclipse version.
         ASTParser parser = ASTParser.newParser(AST.JLS3);
 
         parser.setSource(testClass.getCompilationUnit());

@@ -57,6 +57,7 @@ public class QuickJUnitLaunchShortcut extends JUnitLaunchShortcut {
         }
     }
 
+    @SuppressWarnings("deprecation") // TODO remove if upgrade supported Eclipse version.
     private void launch(Object[] elements, String mode) {
         try {
             IJavaElement elementToLaunch= null;

@@ -56,6 +56,7 @@ public class JUnitNotificationPopup extends AbstractNotificationPopup {
         return ImageDesc.ICON.getImage();
     }
 
+    @SuppressWarnings("deprecation") // TODO remove if upgrade supported Eclipse version.
     @Override
     protected void createContentArea(Composite parent) {
         Composite notificationComposite = new Composite(parent, SWT.NO_FOCUS);
